@@ -21,9 +21,16 @@ import java.util.Scanner;
 public class UserUI {
 
     private Storage storage;
-
+    private int val;
     public UserUI() {
-        this.storage = StorageFactory.getStorage();
+        //chosing methods
+        System.out.println("Pick Option Code");
+        System.out.println("If code=1 then return StorageImpl object");
+        System.out.println("If code=2 then return StorageListImpl");
+        System.out.println("If code=3 then return StorageSortedImpl");
+        System.out.println("For any other value return StorageMapImpl");
+        Scanner scanner = new Scanner(System.in);
+        this.storage = StorageFactory.getStorage(val = scanner.nextInt());
     }
 
     //method adding employee to the employees array
@@ -31,7 +38,16 @@ public class UserUI {
         //Initializing scanner
         System.out.println("-----------------------------------------");
         Scanner scanner = new Scanner(System.in);
-        for(int i = 1; i <= storage.employeeLength(); ++i){ //printing for loop for the size of the empid
+        int len = 0;
+        //if value is addaptive
+        if(val == 1)
+            len = storage.employeeLength();
+        else{
+            System.out.println("Enter array size "); //picking size of collection
+            len = scanner.nextInt();
+            scanner.nextLine();
+        }
+        for(int i = 1; i <= len; ++i){ //printing for loop for the size of the empid
             //getting details of the employee
             System.out.println("Enter employee " + i + " id");
             int empNO = scanner.nextInt();
